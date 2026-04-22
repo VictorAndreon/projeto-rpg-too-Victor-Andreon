@@ -1,47 +1,40 @@
-from status import Status
+from personagem import Personagem
 from missao_coleta import MissaoColeta
-from missao_combate import MissaoCombate
 from missao_exploracao import MissaoExploracao
 
-# --- Missão de Coleta ---
-coleta = MissaoColeta(
+personagem = Personagem("Andreon")
+
+missao_coleta = MissaoColeta(
     nome="Coleta de Ervas",
-    descricao="Coletar ervas medicinais na floresta encantada",
-    recompensa=20,
+    descricao="Colete ervas medicinais na floresta",
+    recompensa=30,
     item_necessario="Erva Medicinal",
-    quantidade_item=10,
-    status=Status.PENDENTE
+    quantidade_item=10
 )
-coleta.iniciar_missao()
-coleta.concluir_missao()
-coleta.exibir_dados()
 
-print()
-
-# --- Missão de Combate ---
-combate = MissaoCombate(
-    nome="Caça aos Orcs",
-    descricao="Eliminar os orcs que invadiram a vila",
+missao_conquista = MissaoExploracao(
+    nome="Travessia do Deserto",
+    descricao="Explore e atravesse o deserto de Arenor",
     recompensa=50,
-    tipo_inimigo="Orc",
-    inimigos_a_derrotar=5,
-    status=Status.PENDENTE
+    regiao_destino="Deserto de Arenor",
+    distancia_em_km=100.0
 )
-combate.iniciar_missao()
-combate.concluir_missao()
-combate.exibir_dados()
+
+personagem.add_missao(missao_coleta)
+personagem.add_missao(missao_conquista)
 
 print()
 
-# --- Missão de Exploração ---
-exploracao = MissaoExploracao(
-    nome="Ruínas do Norte",
-    descricao="Explorar as antigas ruínas ao norte do reino",
-    recompensa=35,
-    regiao_destino="Ruínas do Reino Glacial",
-    distancia_em_km=120.5,
-    status=Status.PENDENTE
-)
-exploracao.iniciar_missao()
-exploracao.concluir_missao()
-exploracao.exibir_dados()
+# Sucesso: coletou 15, precisava de 10
+personagem.concluir_missao(missao_coleta, 15)
+
+# Fracasso: percorreu 60 km, precisava de 100 km
+personagem.concluir_missao(missao_conquista, 60.0)
+
+print()
+personagem.exibir_dados()
+
+print()
+missao_coleta.exibir_dados()
+print()
+missao_conquista.exibir_dados()

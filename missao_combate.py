@@ -31,3 +31,10 @@ class MissaoCombate(Missao):
         if valor <= 0:
             raise ValueError("O número de inimigos deve ser maior que zero")
         self.__inimigos_a_derrotar = valor
+
+    def concluir_missao(self, valor: int) -> bool:
+        if valor >= self.inimigos_a_derrotar:
+            return super().concluir_missao(valor)
+        self.status = Status.FRACASSADA
+        print(f'Missão "{self.nome}" fracassada. Inimigos derrotados: {valor}/{self.inimigos_a_derrotar}.')
+        return False

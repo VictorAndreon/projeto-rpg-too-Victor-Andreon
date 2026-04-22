@@ -31,3 +31,10 @@ class MissaoExploracao(Missao):
         if valor <= 0:
             raise ValueError("A distância deve ser maior que zero")
         self.__distancia_em_km = float(valor)
+
+    def concluir_missao(self, valor: float) -> bool:
+        if valor >= self.distancia_em_km:
+            return super().concluir_missao(valor)
+        self.status = Status.FRACASSADA
+        print(f'Missão "{self.nome}" fracassada. Distância percorrida: {valor}/{self.distancia_em_km} km.')
+        return False

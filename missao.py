@@ -76,11 +76,12 @@ class Missao:
         self.status = Status.EM_ANDAMENTO
         print(f'A missão {self.nome} começou! Objetivo central da missão: {self.descricao}.')
 
-    def concluir_missao(self):
+    def concluir_missao(self, valor):
         if self.__status != Status.EM_ANDAMENTO:
             raise ValueError("Essa missão não pode ser concluída.")
-        self.__status = Status.CONCLUIDA
-        print(f'Missão concluída como sucesso. A contabilidade do prêmio de {self.recompensa} XP agora está pronta para retirada financeira.')
+        self.status = Status.CONCLUIDA
+        print(f'Missão "{self.nome}" concluída com sucesso! Recompensa: {self.recompensa} XP.')
+        return True
 
     def exibir_dados(self):
         print(self)

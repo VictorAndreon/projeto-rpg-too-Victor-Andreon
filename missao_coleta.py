@@ -31,3 +31,10 @@ class MissaoColeta(Missao):
         if valor <= 0:
             raise ValueError("A quantidade do item deve ser maior que zero")
         self.__quantidade_item = valor
+
+    def concluir_missao(self, valor: int) -> bool:
+        if valor >= self.quantidade_item:
+            return super().concluir_missao(valor)
+        self.status = Status.FRACASSADA
+        print(f'Missão "{self.nome}" fracassada. Itens coletados: {valor}/{self.quantidade_item}.')
+        return False
