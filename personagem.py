@@ -90,6 +90,13 @@ class Personagem:
         missao.iniciar_missao()
 
     def concluir_missao(self, missao, valor):
+        if self.__itens_ativos is not None and self.__missao_ativa == missao:
+            arma, vestimenta, utilitario = self.__itens_ativos
+            self.__ataque -= arma.atributo
+            self.__vida   -= vestimenta.atributo + utilitario.atributo
+            self.__missao_ativa = None
+            self.__itens_ativos = None
+
         if missao.concluir_missao(valor):
             self.__xp += missao.recompensa
 
