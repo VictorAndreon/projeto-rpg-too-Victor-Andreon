@@ -60,6 +60,9 @@ class Personagem:
         if self.__missao_ativa is not None:
             raise ValueError(f"O personagem já está em uma missão: {self.__missao_ativa.nome}")
 
+        if missao not in self.__missoes:
+            raise ValueError(f"A missão '{missao.nome}' não está registrada para este personagem")
+
         if not isinstance(arma, Item):
             raise TypeError("arma deve ser uma instância de Item")
         if not isinstance(vestimenta, Item):
