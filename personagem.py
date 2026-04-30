@@ -60,6 +60,13 @@ class Personagem:
         if self.__missao_ativa is not None:
             raise ValueError(f"O personagem já está em uma missão: {self.__missao_ativa.nome}")
 
+        if not isinstance(arma, Item):
+            raise TypeError("arma deve ser uma instância de Item")
+        if not isinstance(vestimenta, Item):
+            raise TypeError("vestimenta deve ser uma instância de Item")
+        if not isinstance(utilitario, Item):
+            raise TypeError("utilitario deve ser uma instância de Item")
+
         if arma.tipo != TipoItem.ARMA:
             raise TypeError("O item de arma deve ser do tipo ARMA")
         if vestimenta.tipo != TipoItem.VESTIMENTA:
