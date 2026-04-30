@@ -56,6 +56,32 @@ class Personagem:
         if missao not in self.__missoes:
             self.__missoes.append(missao)
 
+    def iniciar_missao(self, missao, arma: Item, vestimenta: Item, utilitario: Item):
+        if self.__missao_ativa is not None:
+            raise ValueError(f"O personagem já está em uma missão: {self.__missao_ativa.nome}")
+
+        if arma.tipo != TipoItem.ARMA:
+            raise TypeError("O item de arma deve ser do tipo ARMA")
+        if vestimenta.tipo != TipoItem.VESTIMENTA:
+            raise TypeError("O item de vestimenta deve ser do tipo VESTIMENTA")
+        if utilitario.tipo != TipoItem.UTILITARIO:
+            raise TypeError("O item utilitário deve ser do tipo UTILITARIO")
+
+        if arma not in self.__inventario:
+            raise ValueError(f"O item '{arma.nome}' não está no inventário do personagem")
+        if vestimenta not in self.__inventario:
+            raise ValueError(f"O item '{vestimenta.nome}' não está no inventário do personagem")
+        if utilitario not in self.__inventario:
+            raise ValueError(f"O item '{utilitario.nome}' não está no inventário do personagem")
+
+        self.__ataque += arma.atributo
+        self.__vida   += vestimenta.atributo + utilitario.atributo
+
+        self.__missao_ativa = missao
+        self.__itens_ativos = (arma, vestimenta, utilitario)
+
+        missao.iniciar_missao()
+
     def concluir_missao(self, missao, valor):
         if missao.concluir_missao(valor):
             self.__xp += missao.recompensa
