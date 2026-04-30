@@ -23,18 +23,26 @@ missao_conquista = MissaoExploracao(
 personagem.add_missao(missao_coleta)
 personagem.add_missao(missao_conquista)
 
-print()
+arma       = personagem.inventario[0]
+vestimenta = personagem.inventario[1]
+utilitario = personagem.inventario[2]
 
-# Sucesso: coletou 15, precisava de 10
-personagem.concluir_missao(missao_coleta, 15)
-
-# Fracasso: percorreu 60 km, precisava de 100 km
-personagem.concluir_missao(missao_conquista, 60.0)
-
+print("=== Iniciando missão de coleta ===")
+personagem.iniciar_missao(missao_coleta, arma=arma, vestimenta=vestimenta, utilitario=utilitario)
 print()
 personagem.exibir_dados()
 
 print()
-missao_coleta.exibir_dados()
+print("=== Concluindo missão de coleta (sucesso) ===")
+personagem.concluir_missao(missao_coleta, 15)
 print()
-missao_conquista.exibir_dados()
+personagem.exibir_dados()
+
+print()
+print("=== Iniciando missão de exploração ===")
+personagem.iniciar_missao(missao_conquista, arma=arma, vestimenta=vestimenta, utilitario=utilitario)
+print()
+print("=== Concluindo missão de exploração (fracasso) ===")
+personagem.concluir_missao(missao_conquista, 60.0)
+print()
+personagem.exibir_dados()
