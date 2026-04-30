@@ -44,7 +44,7 @@ class Item:
 
     @atributo.setter
     def atributo(self, valor: int):
-        if not isinstance(valor, int):
+        if isinstance(valor, bool) or not isinstance(valor, int):
             raise TypeError("O atributo deve ser um inteiro")
         if valor <= 0:
             raise ValueError("O atributo deve ser maior que zero")
