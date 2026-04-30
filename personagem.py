@@ -50,7 +50,7 @@ class Personagem:
     def nome (self, valor: str):
         if not isinstance(valor, str):
             raise TypeError("O nome deve ser uma string!")
-        self.nome = valor
+        self.__nome = valor
 
     def add_missao(self, missao):
         if missao not in self.__missoes:
